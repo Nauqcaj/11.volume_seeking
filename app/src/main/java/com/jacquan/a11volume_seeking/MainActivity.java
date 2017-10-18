@@ -1,15 +1,19 @@
 package com.jacquan.a11volume_seeking;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import static android.R.id.progress;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,6 +70,36 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        SeekBar scrubber = (SeekBar) findViewById(R.id.scrubber);
+
+        new Timer().scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+
+            }
+        }, 0, 100);
+
+        scrubber.setMax(mediaPlayer.getDuration());
+
+        scrubber.setProgress(currentVolume);
+
+        scrubber.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+                Log.i("Scrubber value", Integer.toString(progress));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
 
     }
